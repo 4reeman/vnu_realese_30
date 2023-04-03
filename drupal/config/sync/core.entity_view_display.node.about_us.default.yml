@@ -1,0 +1,28 @@
+uuid: 75892e42-2f8b-49fe-baed-3bcb9ea111bc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.about_us.body
+    - node.type.about_us
+  module:
+    - text
+    - user
+id: node.about_us.default
+targetEntityType: node
+bundle: about_us
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

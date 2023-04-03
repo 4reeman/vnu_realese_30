@@ -1,0 +1,23 @@
+uuid: 066b5f06-855c-4ac5-a198-67b9e3f1c36e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.achievement
+  module:
+    - text
+id: node.achievement.body
+field_name: body
+entity_type: node
+bundle: achievement
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

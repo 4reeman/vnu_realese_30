@@ -1,0 +1,8 @@
+uuid: 77392661-75f9-4495-98d5-b066c02163ad
+langcode: en
+status: true
+dependencies: {  }
+name: department
+vid: department
+description: 'Each term will define route parameter for rest api resource'
+weight: 0

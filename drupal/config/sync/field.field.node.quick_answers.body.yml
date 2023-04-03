@@ -1,0 +1,23 @@
+uuid: 6c69c31f-d13c-458e-9cf7-8906f50100dc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.quick_answers
+  module:
+    - text
+id: node.quick_answers.body
+field_name: body
+entity_type: node
+bundle: quick_answers
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

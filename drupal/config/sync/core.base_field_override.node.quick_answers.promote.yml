@@ -1,0 +1,22 @@
+uuid: 5e12edcb-0e40-49b1-a831-694358ff608a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.quick_answers
+id: node.quick_answers.promote
+field_name: promote
+entity_type: node
+bundle: quick_answers
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
