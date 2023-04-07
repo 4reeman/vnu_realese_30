@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.about_us.body
+    - field.field.node.about_us.field_about_image
     - node.type.about_us
   module:
     - text
@@ -27,4 +28,5 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
-hidden: {  }
+hidden:
+  field_about_image: true

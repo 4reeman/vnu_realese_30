@@ -1,0 +1,29 @@
+uuid: 7f30701a-bf9d-497b-84af-410537d36f70
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_about_image
+    - media.type.image_about_main
+    - node.type.about_us
+id: node.about_us.field_about_image
+field_name: field_about_image
+entity_type: node
+bundle: about_us
+label: 'About Image'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image_about_main: image_about_main
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
