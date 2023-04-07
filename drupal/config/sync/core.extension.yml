@@ -19,6 +19,8 @@ module:
   node: 0
   page_cache: 0
   path_alias: 0
+  responsive_image: 0
+  rest_api: 0
   system: 0
   taxonomy: 0
   text: 0
