@@ -1,0 +1,21 @@
+uuid: 27a2b638-9263-4209-bc88-8c943d9c6f52
+langcode: en
+status: true
+dependencies: {  }
+name: rest_about_large
+label: 'Rest About Large'
+effects:
+  5838db90-b9be-4a80-8412-1af046c96eca:
+    uuid: 5838db90-b9be-4a80-8412-1af046c96eca
+    id: image_convert
+    weight: 1
+    data:
+      extension: webp
+  cce1c380-211f-432b-9ad7-88cf4996db98:
+    uuid: cce1c380-211f-432b-9ad7-88cf4996db98
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 550
+      height: 700
+      anchor: center-center

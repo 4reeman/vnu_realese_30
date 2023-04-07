@@ -1,0 +1,21 @@
+uuid: 30ba167d-8ba4-4cad-9ce9-9f094481249d
+langcode: en
+status: true
+dependencies: {  }
+name: rest_about_small
+label: 'Rest About Small'
+effects:
+  4e877125-4463-4158-a71b-8f7dc04bf1e6:
+    uuid: 4e877125-4463-4158-a71b-8f7dc04bf1e6
+    id: image_convert
+    weight: 1
+    data:
+      extension: webp
+  bc365ff6-bbf8-4cf4-96a4-55f6bcf1b7b7:
+    uuid: bc365ff6-bbf8-4cf4-96a4-55f6bcf1b7b7
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 270
+      height: 370
+      anchor: center-center

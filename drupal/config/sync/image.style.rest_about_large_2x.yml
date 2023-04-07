@@ -1,0 +1,21 @@
+uuid: 63f12014-a7e8-4936-ac4e-be2aab85846f
+langcode: en
+status: true
+dependencies: {  }
+name: rest_about_large_2x
+label: 'Rest About Large 2x'
+effects:
+  cf44cfd7-82b9-470c-aec4-42072c8efcaa:
+    uuid: cf44cfd7-82b9-470c-aec4-42072c8efcaa
+    id: image_convert
+    weight: 1
+    data:
+      extension: webp
+  7241e741-c0f9-44ab-965a-949cb73b141a:
+    uuid: 7241e741-c0f9-44ab-965a-949cb73b141a
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 1100
+      height: 1400
+      anchor: center-center
