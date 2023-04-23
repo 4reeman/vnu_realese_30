@@ -1,0 +1,9 @@
+id: single_content
+plugin_id: single_content
+granularity: resource
+configuration:
+  GET:
+    supported_formats:
+      - json
+    supported_auth:
+      - basic_auth
