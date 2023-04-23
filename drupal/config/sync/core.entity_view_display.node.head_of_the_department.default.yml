@@ -1,0 +1,28 @@
+uuid: 875af67a-1d42-43d0-84ab-ff95d64d6d74
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.head_of_the_department.body
+    - node.type.head_of_the_department
+  module:
+    - text
+    - user
+id: node.head_of_the_department.default
+targetEntityType: node
+bundle: head_of_the_department
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

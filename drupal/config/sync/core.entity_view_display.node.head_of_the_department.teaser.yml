@@ -1,0 +1,30 @@
+uuid: c1263955-2143-4175-9841-c6a987b583ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.head_of_the_department.body
+    - node.type.head_of_the_department
+  module:
+    - text
+    - user
+id: node.head_of_the_department.teaser
+targetEntityType: node
+bundle: head_of_the_department
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

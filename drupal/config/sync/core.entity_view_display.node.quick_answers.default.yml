@@ -1,0 +1,28 @@
+uuid: d2649987-781b-48e8-9a3e-32e3f0fd1b62
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.quick_answers.body
+    - node.type.quick_answers
+  module:
+    - text
+    - user
+id: node.quick_answers.default
+targetEntityType: node
+bundle: quick_answers
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

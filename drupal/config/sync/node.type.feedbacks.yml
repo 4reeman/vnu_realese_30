@@ -1,0 +1,11 @@
+uuid: 5434913b-9a18-4e68-b816-f36058c061e6
+langcode: en
+status: true
+dependencies: {  }
+name: Feedbacks
+type: feedbacks
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

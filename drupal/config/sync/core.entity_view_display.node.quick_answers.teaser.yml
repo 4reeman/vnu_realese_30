@@ -1,0 +1,30 @@
+uuid: af63d0ab-ef6c-4d8e-a0d8-e673605d1150
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.quick_answers.body
+    - node.type.quick_answers
+  module:
+    - text
+    - user
+id: node.quick_answers.teaser
+targetEntityType: node
+bundle: quick_answers
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

@@ -1,0 +1,11 @@
+uuid: 5f61b7aa-3e4e-4edb-89d9-b943278d8e01
+langcode: en
+status: true
+dependencies: {  }
+name: Achievement
+type: achievement
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

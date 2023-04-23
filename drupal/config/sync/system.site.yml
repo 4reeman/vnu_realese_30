@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: l58O_yEXSo-SeJi19LXdzTU1tNJG3lmnIhCitRkM1tk
+langcode: en
+uuid: 358132c5-f6e1-4fa2-844f-01e35cc48ebd
+name: 'КАФЕДРА ТЕОРІЇ ФУНКЦІЙ ТА МЕТОДИКИ НАВЧАННЯ МАТЕМАТИКИ'
+mail: test@test.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /user/login
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en

@@ -1,0 +1,21 @@
+uuid: f09c1a13-ebd1-4b68-b7a2-844f06dffddb
+langcode: en
+status: true
+dependencies: {  }
+name: rest_about_small_2x
+label: 'Rest About Small 2x'
+effects:
+  cb432447-a777-40f7-9a52-78fcd610480c:
+    uuid: cb432447-a777-40f7-9a52-78fcd610480c
+    id: image_convert
+    weight: 1
+    data:
+      extension: webp
+  fd7d05b7-d518-4b2b-832b-88e70fa84cdf:
+    uuid: fd7d05b7-d518-4b2b-832b-88e70fa84cdf
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 540
+      height: 740
+      anchor: center-center

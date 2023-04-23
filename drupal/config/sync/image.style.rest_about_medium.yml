@@ -1,0 +1,21 @@
+uuid: 343c62be-a33b-49b7-a9a8-0d8ca90b9903
+langcode: en
+status: true
+dependencies: {  }
+name: rest_about_medium
+label: 'Rest About Medium'
+effects:
+  eb943863-b358-4137-bae5-68905baaef02:
+    uuid: eb943863-b358-4137-bae5-68905baaef02
+    id: image_convert
+    weight: 1
+    data:
+      extension: webp
+  0000509a-71e2-4eeb-87b6-cfc1aeae9ae8:
+    uuid: 0000509a-71e2-4eeb-87b6-cfc1aeae9ae8
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 450
+      height: 550
+      anchor: center-center

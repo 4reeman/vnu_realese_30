@@ -1,0 +1,48 @@
+uuid: 680c22f0-eb32-493a-b93c-c9999569a77c
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.rest_about_large
+    - image.style.rest_about_large_2x
+    - image.style.rest_about_medium
+    - image.style.rest_about_medium_2x
+    - image.style.rest_about_small
+    - image.style.rest_about_small_2x
+  module:
+    - rest_api
+id: mein_page_about
+label: 'Main Page About'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: rest_about_medium
+    breakpoint_id: rest.large
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: rest_about_medium_2x
+    breakpoint_id: rest.large
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: rest_about_large
+    breakpoint_id: rest.small
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: rest_about_large_2x
+    breakpoint_id: rest.small
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: rest_about_small
+    breakpoint_id: rest.extra_small
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: rest_about_small_2x
+    breakpoint_id: rest.extra_small
+    multiplier: 2x
+breakpoint_group: rest_api
+fallback_image_style: '_empty image_'
