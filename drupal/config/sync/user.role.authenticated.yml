@@ -2,8 +2,12 @@ uuid: a775f856-c559-4f37-9ff1-f0963843654e
 langcode: en
 status: true
 dependencies:
+  config:
+    - rest.resource.content_bundle
+    - rest.resource.single_content
   module:
     - media
+    - rest
     - system
 _core:
   default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
@@ -13,4 +17,6 @@ weight: 1
 is_admin: false
 permissions:
   - 'access content'
+  - 'restful get content_bundle'
+  - 'restful get single_content'
   - 'view media'

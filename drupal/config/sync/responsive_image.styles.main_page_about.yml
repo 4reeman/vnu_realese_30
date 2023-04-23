@@ -1,4 +1,4 @@
-uuid: 680c22f0-eb32-493a-b93c-c9999569a77c
+uuid: fcd0792c-d1b4-4365-ba17-b2092b3a9730
 langcode: en
 status: true
 dependencies:
@@ -9,9 +9,10 @@ dependencies:
     - image.style.rest_about_medium_2x
     - image.style.rest_about_small
     - image.style.rest_about_small_2x
+    - image.style.thumbnail
   module:
     - rest_api
-id: mein_page_about
+id: main_page_about
 label: 'Main Page About'
 image_style_mappings:
   -
@@ -45,4 +46,4 @@ image_style_mappings:
     breakpoint_id: rest.extra_small
     multiplier: 2x
 breakpoint_group: rest_api
-fallback_image_style: '_empty image_'
+fallback_image_style: thumbnail

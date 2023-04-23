@@ -1,0 +1,9 @@
+services:
+  rest_api.node_data_provider:
+    class: Drupal\rest_api\NodeDataProvider
+    arguments: ['@entity_type.manager', '@entity_field.manager', '@breakpoint.manager']
+  rest_api.auth_redirect:
+    class: Drupal\rest_api\EventSubscriber\AuthRedirect
+    tags:
+      - { name: event_subscriber }
+    arguments: ['@current_user', '@current_route_match']
