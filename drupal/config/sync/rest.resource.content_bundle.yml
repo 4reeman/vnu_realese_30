@@ -1,0 +1,18 @@
+uuid: b223d391-8bf1-403c-a9a4-bf5d5d15bb19
+langcode: en
+status: true
+dependencies:
+  module:
+    - rest_api
+    - serialization
+    - user
+id: content_bundle
+plugin_id: content_bundle
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - cookie

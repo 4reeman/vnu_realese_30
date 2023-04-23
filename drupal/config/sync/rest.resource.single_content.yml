@@ -1,0 +1,18 @@
+uuid: fa3767b5-9c46-4225-9f6e-64887631c8c9
+langcode: en
+status: true
+dependencies:
+  module:
+    - rest_api
+    - serialization
+    - user
+id: single_content
+plugin_id: single_content
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - cookie

@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.about_us.body
     - field.field.node.about_us.field_about_image
+    - field.field.node.about_us.field_site_name
     - node.type.about_us
   module:
     - text
@@ -30,3 +31,4 @@ content:
     region: content
 hidden:
   field_about_image: true
+  field_site_name: true
