@@ -1,0 +1,18 @@
+uuid: 61c879fc-1cf7-4c91-9748-ea7fe5cc4076
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.head_of_the_department
+id: node.head_of_the_department.changed
+field_name: changed
+entity_type: node
+bundle: head_of_the_department
+label: Changed
+description: 'The time that the node was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

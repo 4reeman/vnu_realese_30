@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - rest.resource.content_bundle
+    - rest.resource.node_bundle
     - rest.resource.single_content
   module:
     - media
@@ -18,5 +19,6 @@ is_admin: false
 permissions:
   - 'access content'
   - 'restful get content_bundle'
+  - 'restful get node_bundle'
   - 'restful get single_content'
   - 'view media'

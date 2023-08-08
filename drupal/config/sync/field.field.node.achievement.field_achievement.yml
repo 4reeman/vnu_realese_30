@@ -1,0 +1,19 @@
+uuid: eff2e652-e077-4f5c-9900-aca9d8cc357d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_achievement
+    - node.type.achievement
+id: node.achievement.field_achievement
+field_name: field_achievement
+entity_type: node
+bundle: achievement
+label: Achievement
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

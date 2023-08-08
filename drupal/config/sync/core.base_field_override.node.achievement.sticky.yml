@@ -1,0 +1,22 @@
+uuid: 33352906-5405-4af3-91ef-a4c85da96a85
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.achievement
+id: node.achievement.sticky
+field_name: sticky
+entity_type: node
+bundle: achievement
+label: 'Sticky at top of lists'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

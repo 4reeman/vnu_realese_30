@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.about_us.body
     - field.field.node.about_us.field_about_image
-    - field.field.node.about_us.field_site_name
     - node.type.about_us
   module:
     - text
@@ -17,18 +16,20 @@ bundle: about_us
 mode: teaser
 content:
   body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 101
-    region: content
-  links:
+    type: text_default
+    label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
+    region: content
+  field_about_image:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
-  field_about_image: true
-  field_site_name: true
+  langcode: true
+  links: true

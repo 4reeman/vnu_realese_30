@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.field.node.about_us.body
     - field.field.node.about_us.field_about_image
-    - field.field.node.about_us.field_site_name
     - node.type.about_us
   module:
     - text
@@ -20,7 +19,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 1
     region: content
   field_about_image:
     type: entity_reference_entity_view
@@ -29,19 +28,12 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 102
-    region: content
-  field_site_name:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 103
+    weight: 2
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
-hidden: {  }
+hidden:
+  langcode: true

@@ -3,30 +3,41 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.achievement.body
+    - field.field.node.achievement.field_achievement
+    - field.field.node.achievement.field_quantity
     - node.type.achievement
-  module:
-    - text
 id: node.achievement.default
 targetEntityType: node
 bundle: achievement
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 121
-    region: content
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_achievement:
+    type: string_textfield
+    weight: 122
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_quantity:
+    type: number
+    weight: 123
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
@@ -56,6 +67,11 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete

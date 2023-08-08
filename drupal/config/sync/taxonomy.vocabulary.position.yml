@@ -1,0 +1,8 @@
+uuid: 0671e0d2-76f6-43cd-a129-b80c2595b3a5
+langcode: en
+status: true
+dependencies: {  }
+name: position
+vid: position
+description: 'position of professor'
+weight: 0

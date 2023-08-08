@@ -1,0 +1,20 @@
+uuid: abbf2268-2278-4f97-bd9c-ae3925fea744
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.image_about_main
+id: media.image_about_main.name
+field_name: name
+entity_type: media
+bundle: image_about_main
+label: Name
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

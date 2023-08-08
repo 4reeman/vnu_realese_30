@@ -1,0 +1,22 @@
+uuid: eb3b3e61-971f-46f6-8e81-0b49f89dcb15
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.feedbacks
+id: node.feedbacks.status
+field_name: status
+entity_type: node
+bundle: feedbacks
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
