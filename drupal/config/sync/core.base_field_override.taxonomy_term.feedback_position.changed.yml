@@ -1,0 +1,18 @@
+uuid: e4209386-9e68-432f-82c9-e9c94a50caca
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.feedback_position
+id: taxonomy_term.feedback_position.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: feedback_position
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

@@ -1,0 +1,9 @@
+id: node_bundle
+plugin_id: node_bundle
+granularity: resource
+configuration:
+  GET:
+    supported_formats:
+      - json
+    supported_auth:
+      - basic_auth

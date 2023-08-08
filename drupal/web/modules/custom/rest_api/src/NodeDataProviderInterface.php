@@ -12,8 +12,10 @@ interface NodeDataProviderInterface {
    *
    * @param string $id
    *   Node id.
+   * @param string $langcode
+   *   Language.
    */
-  public function loadNode(string $id);
+  public function loadNode(string $id, string $langcode);
 
   /**
    * Create divided field groups (base_fields, config_fields).
@@ -23,8 +25,10 @@ interface NodeDataProviderInterface {
    *
    * @param string $view_mode
    *   Route parameter view mode.
+   * @param string $langcode
+   *   Route parameter language.
    */
-  public function setNodeDataStructure(string $view_mode);
+  public function setNodeDataStructure(string $view_mode, string $langcode);
 
   /**
    * Getter of NodeDataProvider.

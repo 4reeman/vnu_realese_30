@@ -1,0 +1,39 @@
+uuid: de151f51-5847-465c-87f9-9620e80d3725
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.dangerouslysetinnerhtml
+  module:
+    - ckeditor5
+format: dangerouslysetinnerhtml
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - undo
+      - redo
+      - sourceEditing
+      - bold
+      - underline
+      - italic
+      - bulletedList
+      - numberedList
+      - link
+      - drupalInsertImage
+  plugins:
+    ckeditor5_imageResize:
+      allow_resize: true
+    ckeditor5_list:
+      reversed: true
+      startIndex: true
+    ckeditor5_sourceEditing:
+      allowed_tags: {  }
+image_upload:
+  status: false
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: 0
+    height: 0

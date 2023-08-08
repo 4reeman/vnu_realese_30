@@ -3,9 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.dangerouslysetinnerhtml
     - rest.resource.content_bundle
+    - rest.resource.node_bundle
     - rest.resource.single_content
   module:
+    - filter
     - media
     - rest
     - system
@@ -18,5 +21,7 @@ is_admin: false
 permissions:
   - 'access content'
   - 'restful get content_bundle'
+  - 'restful get node_bundle'
   - 'restful get single_content'
+  - 'use text format dangerouslysetinnerhtml'
   - 'view media'

@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.node.feedbacks.body
+    - field.field.node.feedbacks.field_feedbacks_image
+    - field.field.node.feedbacks.field_stude
     - node.type.feedbacks
   module:
     - text
@@ -20,9 +22,27 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  field_feedbacks_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_stude:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
     weight: 100
     region: content
-hidden: {  }
+hidden:
+  langcode: true

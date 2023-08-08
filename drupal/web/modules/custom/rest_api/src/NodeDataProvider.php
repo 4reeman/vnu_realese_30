@@ -58,8 +58,12 @@ class NodeDataProvider implements NodeDataProviderInterface {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function loadNode(string $id): void {
-    $this->node = $this->entityTypeManager->getStorage('node')->load($id);
+  public function loadNode(string $id, string $langcode): void {
+    $node = $this->entityTypeManager->getStorage('node')->load($id);
+    $this->node = $node->getTranslation('en');
+    if ($this->node->hasTranslation($langcode)) {
+      $this->node = $node->getTranslation($langcode);
+    }
   }
 
   /**
@@ -68,12 +72,12 @@ class NodeDataProvider implements NodeDataProviderInterface {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function setNodeDataStructure(string $view_mode): void {
+  public function setNodeDataStructure(string $view_mode, $langcode): void {
     $nid = $this->node->id();
     $field_definitions = $this->entityFieldManager->getFieldDefinitions('node', $this->node->getType());
-    foreach ($this->baseFieldDefinitions as $field) {
-      if ($field_value = $this->node->get($field->getName())->value) {
-        $this->response[$nid]['base_fields'][$field->getName()] = $field_value;
+    foreach ($this->baseFieldDefinitions as $field => $field_definition) {
+      if ($field_value = $this->node->get($field)->value) {
+        $this->response[$nid]['base_fields'][$field] = $field_value;
       }
     }
     foreach ($field_definitions as $field => $field_definition) {
@@ -84,11 +88,12 @@ class NodeDataProvider implements NodeDataProviderInterface {
               if ($this->node->get($field)->entity->getEntityTypeId() == 'media') {
                 $this->setMediaField($field, $view_mode);
               }
+              if ($this->node->get($field)->entity->getEntityTypeId() == 'taxonomy_term') {
+                $this->setTaxonomyField($field, $langcode);
+              }
               break;
-
             case 'text_with_summary' or 'text':
-            default:
-              $this->setTextField($field);
+              $this->setBodyField($field);
               break;
           }
         }
@@ -102,8 +107,11 @@ class NodeDataProvider implements NodeDataProviderInterface {
    * @param string $field
    *   Field Name.
    */
-  private function setTextField(string $field): void {
-    $this->response[$this->node->id()]['config_fields'][$field] = $this->node->get($field)->value;
+  private function setBodyField(string $field): void {
+    $this->response[$this->node->id()]['config_fields'][$field]['value'] = $this->node->get($field)->value;
+    if (!empty($this->node->get($field)->summary)) {
+      $this->response[$this->node->id()]['config_fields'][$field]['summary'] = $this->node->get($field)->summary;
+    }
   }
 
   /**
@@ -133,26 +141,51 @@ class NodeDataProvider implements NodeDataProviderInterface {
 
     $variables = [
       'uri' => $this->node->get($field)->entity->$media_field->entity->getFileUri(),
-      'attributes' => [
-        'alt' => $this->node->get($field)->entity->$media_field->alt,
-      ],
       'responsive_image_style_id' => $responsive_image_style_id,
     ];
 
+    $this->response[$this->node->id()]['config_fields'][$field]['alt'] = $this->node->get($field)->entity->$media_field->alt;
     $responsive_image_style = ResponsiveImageStyle::load($responsive_image_style_id);
     $breakpoints = array_reverse($this->breakpointManager->getBreakpointsByGroup($responsive_image_style->getBreakpointGroup()));
     foreach ($responsive_image_style->getKeyedImageStyleMappings() as $breakpoint_id => $multipliers) {
       if (isset($breakpoints[$breakpoint_id])) {
         $attributes = _responsive_image_build_source_attributes($variables, $breakpoints[$breakpoint_id], $multipliers);
-        $this->response[$this->node->id()]['config_fields'][$field][] = $attributes->toArray();
+//        $this->response[$this->node->id()]['config_fields'][$field][] = $attributes->toArray();
+        $this->response[$this->node->id()]['config_fields'][$field]['attributes'][] = $attributes->toArray();
       }
     }
+  }
+
+  /**
+   * Set Taxonomy field.
+   *
+   * Set Taxonomy Field label for result array.
+   *
+   * @param string $field
+   *   Field Name.
+   * @param string $langcode
+   *   Selected language.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  private function setTaxonomyField(string $field, string $langcode) {
+    $tid = $this->node->get($field)->target_id;
+    $term = $this->entityTypeManager->getStorage('taxonomy_term')->load($tid)->getTranslation($langcode);
+    $this->response[$this->node->id()]['config_fields'][$field] = $term->getName();
   }
 
   /**
    * {@inheritDoc}
    */
   public function getStructuredData(): array|null {
+    // @todo rework dangerous marazm revealed.
+    $index = 0;
+    foreach ($this->response as $node => $fields) {
+      $this->response[$index] = $fields;
+      unset($this->response[$node]);
+      $index++;
+    }
     return $this->response;
   }
 

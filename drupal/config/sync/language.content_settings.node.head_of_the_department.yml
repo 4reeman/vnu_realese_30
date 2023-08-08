@@ -1,0 +1,18 @@
+uuid: 375481ec-a298-42ef-b6b4-1e5ecf9fb209
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.head_of_the_department
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: node.head_of_the_department
+target_entity_type_id: node
+target_bundle: head_of_the_department
+default_langcode: site_default
+language_alterable: true

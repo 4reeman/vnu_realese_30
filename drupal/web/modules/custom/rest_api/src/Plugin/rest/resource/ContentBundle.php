@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
  *   id = "content_bundle",
  *   label = @Translation("Content Bundle"),
  *   uri_paths = {
- *     "canonical" = "/rest_api/{site_name}/{bundle}/{view_mode}/{quantity}"
+ *     "canonical" = "/rest_api/{bundle}/{view_mode}/{quantity}/{langcode}"
  *   }
  * )
  */
@@ -57,8 +57,8 @@ class ContentBundle extends ResourceBase {
    */
   public function __construct(
     array $configuration,
-    $plugin_id,
-    $plugin_definition,
+          $plugin_id,
+          $plugin_definition,
     array $serializer_formats,
     LoggerInterface $logger,
     protected EntityTypeManagerInterface $entityTypeManager,
@@ -82,43 +82,40 @@ class ContentBundle extends ResourceBase {
     );
   }
 
-  /**
-   * Machine Names from Term Label.
-   *
-   *   Create Array from terms machine_name => tid.
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   */
-  private function termMachineName(): void {
-    $vid = 'department';
-    $terms = $this->entityTypeManager->getStorage('taxonomy_term')->loadByProperties(['vid' => $vid]);
-    foreach ($terms as $term) {
-      $label = strtolower($term->label());
-      $exp = explode(' ', $label);
-      $imp = implode('_', $exp);
-      $this->terms[$imp] = $term->id();
-    }
-  }
+//  /**
+//   * Machine Names from Term Label.
+//   *
+//   *   Create Array from terms machine_name => tid.
+//   *
+//   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+//   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+//   */
+//  private function termMachineName(): void {
+//    $vid = 'department';
+//    $terms = $this->entityTypeManager->getStorage('taxonomy_term')->loadByProperties(['vid' => $vid]);
+//    foreach ($terms as $term) {
+//      $label = strtolower($term->label());
+//      $exp = explode(' ', $label);
+//      $imp = implode('_', $exp);
+//      $this->terms[$imp] = $term->id();
+//    }
+//  }
 
   /**
    * Get all Node`s id by tid, bundle and limit sample by Nodes quantity.
    *
    *  Sorted by last modified date (DESC).
    *
-   * @param string $term_id
-   *   Taxonomy term id.
    * @param string $bundle
    *   Node`s Bundle.
    * @param int $quantity
    *   Quantity of nodes to return.
    */
-  private function getNids(string $term_id, string $bundle, int $quantity): void {
+  private function getNids(string $bundle, int $quantity): void {
     $query = \Drupal::entityQuery('node')
       ->accessCheck()
       ->condition('status', 1)
       ->condition('type', $bundle)
-      ->condition('field_site_name', $term_id)
       ->sort('changed', 'DESC')
       ->range(0, $quantity)
       ->execute();
@@ -128,29 +125,29 @@ class ContentBundle extends ResourceBase {
   /**
    * Responds to entity GET requests.
    *
-   * @param string $site_name
-   *   Taxonomy term parameter.
    * @param string $bundle
    *   Node`s Bundle.
    * @param string $view_mode
    *   View Mode.
    * @param int $quantity
    *   Quantity of nodes to return.
+   * @param string $langcode
+   *   Language.
    *
    * @throws \ErrorException
    */
-  public function get(string $site_name, string $bundle, string $view_mode, int $quantity): ResourceResponse {
+  public function get(string $bundle, string $view_mode, int $quantity, string $langcode): ResourceResponse {
     try {
-      $this->termMachineName();
-      if (!array_key_exists($site_name, $this->terms)) {
-        throw new \ErrorException('Invalid param:' . $site_name);
-      }
-      $tid = $this->terms[$site_name];
-      $this->getNids($tid, $bundle, $quantity);
+//      $this->termMachineName();
+//      if (!array_key_exists($site_name, $this->terms)) {
+//        throw new \ErrorException('Invalid param:' . $site_name);
+//      }
+//      $tid = $this->terms[$site_name];
+      $this->getNids($bundle, $quantity);
       $node_data = $this->nodeDataProvider;
       foreach ($this->nids as $nid) {
-        $node_data->loadNode($nid);
-        $node_data->setNodeDataStructure($view_mode);
+        $node_data->loadNode($nid, $langcode);
+        $node_data->setNodeDataStructure($view_mode, $langcode);
       }
     }
     catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {

@@ -1,0 +1,29 @@
+uuid: acb89c56-bfc1-43e2-af7c-2c75f198efcf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_department_head_image
+    - media.type.image_about_main
+    - node.type.head_of_the_department
+id: node.head_of_the_department.field_department_head_image
+field_name: field_department_head_image
+entity_type: node
+bundle: head_of_the_department
+label: 'Department Head Image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image_about_main: image_about_main
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

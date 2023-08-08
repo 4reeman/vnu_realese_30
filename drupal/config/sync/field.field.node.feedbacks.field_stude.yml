@@ -1,26 +1,26 @@
-uuid: 64577f14-2923-45e1-8f90-a3520c2ee008
+uuid: b066d06c-fc47-40c0-8a16-788abde8c02b
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_site_name
-    - node.type.about_us
-    - taxonomy.vocabulary.department
-id: node.about_us.field_site_name
-field_name: field_site_name
+    - field.storage.node.field_stude
+    - node.type.feedbacks
+    - taxonomy.vocabulary.feedback_position
+id: node.feedbacks.field_stude
+field_name: field_stude
 entity_type: node
-bundle: about_us
-label: 'Site Name'
+bundle: feedbacks
+label: 'Student position'
 description: ''
-required: true
-translatable: false
+required: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      department: department
+      feedback_position: feedback_position
     sort:
       field: name
       direction: asc

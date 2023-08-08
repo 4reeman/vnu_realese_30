@@ -1,0 +1,29 @@
+uuid: 8295c76a-1456-4ec9-9f15-cce5df9004c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_position_of_professor
+    - node.type.head_of_the_department
+    - taxonomy.vocabulary.position
+id: node.head_of_the_department.field_position_of_professor
+field_name: field_position_of_professor
+entity_type: node
+bundle: head_of_the_department
+label: 'Position of professor'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      position: position
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

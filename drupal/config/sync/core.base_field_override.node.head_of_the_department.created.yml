@@ -1,0 +1,18 @@
+uuid: 88956e6c-e51b-4eda-80b5-5ecd4141e37b
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.head_of_the_department
+id: node.head_of_the_department.created
+field_name: created
+entity_type: node
+bundle: head_of_the_department
+label: 'Authored on'
+description: 'The time that the node was created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

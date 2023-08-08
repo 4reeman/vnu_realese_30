@@ -55,16 +55,18 @@ class AuthRedirect implements EventSubscriberInterface {
 
     $login = 'user.login';
     $rest_bundle = 'rest.content_bundle.GET';
+    $rest_ids = 'rest.node_bundle.GET';
     $rest_node = 'rest.single_content.GET';
     $routeName = $this->route->getRouteName();
     if (
       !($routeName == $login
       || $routeName == $rest_bundle
-      || $routeName == $rest_node)
+      || $routeName == $rest_node
+      || $routeName == $rest_ids)
       && $this->user->isAnonymous()
       ) {
-      $response = new RedirectResponse(Url::fromRoute($login)->toString(), 301);
-      $event->setResponse($response);
+//      $response = new RedirectResponse(Url::fromRoute($login)->toString(), 301);
+//      $event->setResponse($response);
     }
   }
 
