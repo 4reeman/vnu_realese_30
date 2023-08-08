@@ -1,0 +1,24 @@
+<?php
+
+function rest_api_form_node_form_alter(&$form) {
+//  $form['in'] = array(
+//    '#type' => 'fieldset',
+//    '#default_tab' => 'edit-publication',
+//  );
+//  $form['bla'] = array(
+//    '#type' => 'details',
+//    '#title' =>
+//      t('Author'),
+//    '#group' => 'in',
+//  );
+//  $form['aga'] = array(
+//    '#type' => 'details',
+//    '#title' =>
+//      t('Publication'),
+//    '#group' => 'in',
+//  );
+}
+
+function rest_api_entity_view_display_alter(&$context) {
+  $b = $context;
+}

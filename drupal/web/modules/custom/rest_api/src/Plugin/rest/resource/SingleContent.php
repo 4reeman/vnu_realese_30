@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "single_content",
  *   label = @Translation("Single Content"),
  *   uri_paths = {
- *     "canonical" = "/rest_api/node/{id}/{view_mode}"
+ *     "canonical" = "/rest_api/node/{id}/{view_mode}/{langcode}"
  *   }
  * )
  */
@@ -69,12 +69,14 @@ class SingleContent extends ResourceBase {
    *   Node id.
    * @param string $view_mode
    *   View Mode.
+   * @param string $langcode
+   *   Language.
    */
-  public function get(string $id, string $view_mode): ResourceResponse {
+  public function get(string $id, string $langcode, string $view_mode): ResourceResponse {
     $node_data = $this->nodeDataProvider;
-    $node_data->loadNode($id);
-    $node_data->setNodeDataStructure($view_mode);
-    $response = new ResourceResponse($node_data->getStructuredData());
+    $node_data->loadNode($id, $langcode);
+    $node_data->setNodeDataStructure($view_mode, $langcode);
+    $response = new ResourceResponse($node_data->getStructuredData()[0]);
     $response->addCacheableDependency($response);
     return $response;
   }

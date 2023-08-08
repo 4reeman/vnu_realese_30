@@ -2,7 +2,6 @@
 
 namespace Drupal\rest_api\Plugin\rest\resource;
 
-use Drupal\rest_api\NodeDataProviderInterface;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -15,14 +14,14 @@ use Psr\Log\LoggerInterface;
  * Provides a Node`s fields structured array.
  *
  * @RestResource(
- *   id = "content_bundle",
- *   label = @Translation("Content Bundle"),
+ *   id = "node_bundle",
+ *   label = @Translation("Node Bundle"),
  *   uri_paths = {
- *     "canonical" = "/rest_api/{bundle}/{view_mode}/{quantity}/{langcode}"
+ *     "canonical" = "/rest_api/{site_name}/{bundle}/range/{range_start}/{length}"
  *   }
  * )
  */
-class ContentBundle extends ResourceBase {
+class NodeBundle extends ResourceBase {
   /**
    * Queried nids.
    *
@@ -52,8 +51,6 @@ class ContentBundle extends ResourceBase {
    *   A logger instance.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   EntityTypeManager instance.
-   * @param \Drupal\rest_api\NodeDataProviderInterface $nodeDataProvider
-   *   NodeDataProvider instance.
    */
   public function __construct(
     array $configuration,
@@ -62,7 +59,6 @@ class ContentBundle extends ResourceBase {
     array $serializer_formats,
     LoggerInterface $logger,
     protected EntityTypeManagerInterface $entityTypeManager,
-    private readonly NodeDataProviderInterface $nodeDataProvider
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $serializer_formats, $logger);
   }
@@ -77,83 +73,80 @@ class ContentBundle extends ResourceBase {
       $plugin_definition,
       $container->getParameter('serializer.formats'),
       $container->get('logger.factory')->get('rest'),
-      $container->get('entity_type.manager'),
-      $container->get('rest_api.node_data_provider')
+      $container->get('entity_type.manager')
     );
   }
 
-//  /**
-//   * Machine Names from Term Label.
-//   *
-//   *   Create Array from terms machine_name => tid.
-//   *
-//   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-//   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-//   */
-//  private function termMachineName(): void {
-//    $vid = 'department';
-//    $terms = $this->entityTypeManager->getStorage('taxonomy_term')->loadByProperties(['vid' => $vid]);
-//    foreach ($terms as $term) {
-//      $label = strtolower($term->label());
-//      $exp = explode(' ', $label);
-//      $imp = implode('_', $exp);
-//      $this->terms[$imp] = $term->id();
-//    }
-//  }
+  /**
+   * Machine Names from Term Label.
+   *
+   *   Create Array from terms machine_name => tid.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  private function termMachineName(): void {
+    $vid = 'department';
+    $terms = $this->entityTypeManager->getStorage('taxonomy_term')->loadByProperties(['vid' => $vid]);
+    foreach ($terms as $term) {
+      $label = strtolower($term->label());
+      $exp = explode(' ', $label);
+      $imp = implode('_', $exp);
+      $this->terms[$imp] = $term->id();
+    }
+  }
 
   /**
    * Get all Node`s id by tid, bundle and limit sample by Nodes quantity.
    *
    *  Sorted by last modified date (DESC).
    *
+   * @param string $term_id
+   *   Taxonomy term id.
    * @param string $bundle
    *   Node`s Bundle.
    * @param int $quantity
    *   Quantity of nodes to return.
    */
-  private function getNids(string $bundle, int $quantity): void {
+  private function setNids(string $term_id, string $bundle, int $range_start, int $length): void {
     $query = \Drupal::entityQuery('node')
       ->accessCheck()
       ->condition('status', 1)
       ->condition('type', $bundle)
+      ->condition('field_site_name', $term_id)
       ->sort('changed', 'DESC')
-      ->range(0, $quantity)
+      ->range($range_start, $length)
       ->execute();
-    $this->nids = $query;
+    foreach ($query as $changed => $nid) {
+      $this->nids[] = $nid;
+    }
   }
 
   /**
    * Responds to entity GET requests.
    *
+   * @param string $site_name
+   *   Taxonomy term parameter.
    * @param string $bundle
    *   Node`s Bundle.
-   * @param string $view_mode
-   *   View Mode.
    * @param int $quantity
    *   Quantity of nodes to return.
-   * @param string $langcode
-   *   Language.
    *
    * @throws \ErrorException
    */
-  public function get(string $bundle, string $view_mode, int $quantity, string $langcode): ResourceResponse {
+  public function get(string $site_name, string $bundle, int $range_start, $length): ResourceResponse {
     try {
-//      $this->termMachineName();
-//      if (!array_key_exists($site_name, $this->terms)) {
-//        throw new \ErrorException('Invalid param:' . $site_name);
-//      }
-//      $tid = $this->terms[$site_name];
-      $this->getNids($bundle, $quantity);
-      $node_data = $this->nodeDataProvider;
-      foreach ($this->nids as $nid) {
-        $node_data->loadNode($nid, $langcode);
-        $node_data->setNodeDataStructure($view_mode, $langcode);
+      $this->termMachineName();
+      if (!array_key_exists($site_name, $this->terms)) {
+        throw new \ErrorException('Invalid param:' . $site_name);
       }
+      $tid = $this->terms[$site_name];
+      $this->setNids($tid, $bundle, $range_start, $length);
     }
     catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
       return new ResourceResponse(['message' => $e]);
     }
-    $response = new ResourceResponse($this->nodeDataProvider->getStructuredData());
+    $response = new ResourceResponse($this->nids);
     $response->addCacheableDependency($response);
     return $response;
   }
